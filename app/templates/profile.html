@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+  <head>
+     <link href="/static/css/profile.css" rel="stylesheet" >
+  </head>
+  <body>
+    <div class="contactus">
+      <h1> Create User Profile </h1>
+      <form action="{{url_for('profile')}}" method="POST" enctype="multipart/form-data">
+          {{ form.hidden_tag() }}
+          Upload Profile Photo<br>
+          <input type="file" name="pic" accept="image/*" class="fields">
+          <br>
+          Username<br>
+          <input name="username" type="text" class="fields">
+          <br>
+          First Name<br>
+          <input name="fname" type="text" class="fields">
+          <br>
+          Last Name<br>
+          <input name="lname" type="text" class="fields">
+          <br>
+          Age<br>
+          <input name="age" type="text" class="fields">
+          <br>
+          Sex<br>
+          <select class="fields">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+          <br>
+          <input type="submit" value="Submit">
+      </form>
+    </div>
+  </body>
+</html>

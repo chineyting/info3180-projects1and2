@@ -1,0 +1,22 @@
+body {
+  background-color: #f6f9ec;
+}
+
+h1 {
+  color: #5c6d5a;
+}
+
+.contactus {
+  padding: 0 0 0 50px;
+}
+
+.fields {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 300px;
+}
+
+#messagearea {
+  width: 600px;
+  height: 150px;
+}
