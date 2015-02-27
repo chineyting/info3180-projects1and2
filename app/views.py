@@ -10,7 +10,9 @@ from app import app
 from flask import render_template, request, redirect, url_for
 from flask_wtf import Form
 from wtforms import StringField
-from wtforms.validators import DataRequired
+from wtforms.validators import Required
+from flask.ext.wtf import Form
+from wtforms.fields import TextField
 
 ###
 # Routing for your application.
@@ -21,25 +23,33 @@ def home():
     """Render website's home page."""
     return render_template('home.html')
 
-class MyForm(Form):
-    name = StringField('name', validators=[DataRequired()])  
+class ProfileForm(Form):
+    username = TextField('username', validators=[Required()])  
+    firstname = TextField('fname', validators=[Required(),firstname()])
+    lastname = TextField('lname', validators=[Required(),Lname()])
+    age = TextField('age', validators=[Required(),Age()])
   
-@app.route('/profile', methods=('GET', 'POST'))
-def profile():
+@app.route('/profile/', methods=('GET', 'POST'))
+def add_profile():
     """route for adding profile"""
-    form = MyForm(csrf_enabled=False)
+    form = ProfileForm(csrf_enabled=False)
     if form.validate_on_submit():
         return redirect('/success')
     return render_template('profile.html', form=form)
+#     return "add a profile"
 
-@app.route('/profiles')
-def profiles():
+@app.route('/success')
+def success():
+    return render_template('success.html')
+
+@app.route('/profiles/')
+def list_profiles():
     """route for viewing list of profiles"""
     return render_template('profiles.html')  
 
-@app.route('/profile/<userid>')
-def thing():
-    """route for viewing a profile"""
+# @app.route('/profile/,<int: id>')
+# def thing():
+#     """route for viewing a profile"""
   
 @app.route('/about/')
 def about():
