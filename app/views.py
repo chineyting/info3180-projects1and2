@@ -8,11 +8,7 @@ This file creates your application.
 
 from app import app
 from flask import render_template, request, redirect, url_for
-# from flask_wtf import Form
-# from wtforms import StringField
-from flask.ext.wtf import Form
-from wtforms.fields import TextField
-from wtforms.validators import Required
+from wtforms import TextField, Form, IntegerField, validators
 
 from app import db
 from app.models import Profile
@@ -30,26 +26,25 @@ class ProfileForm(Form):
     username = TextField('username', validators=[Required()])  
     firstname = TextField('firstname', validators=[Required()])
     lastname = TextField('lastname', validators=[Required()])
-#     age = TextField('age', validators=[Required()])
+    age = IntegerField('age', validators=[Required()])
     sex = TextField('sex', validators=[Required()])
   
-@app.route('/profile/', methods=('GET', 'POST'))
+@app.route('/profile', methods=('GET', 'POST'))
 def add_profile():
     """route for adding profile"""
     form = ProfileForm(csrf_enabled=False)
     if request.method == "POST":
-#         if form.validate_on_submit():
-        username = request.form['username']
-        firstname = request.form['firstname']
-        lastname = request.form['lastname']
-#         age = request.form['age']
-        sex = request.form['sex']
-        newprofile = Profile(username,firstname,lastname,sex)
-        db.session.add(newprofile)
-        db.session.commit()
-        return redirect('/success')
-    return render_template('profile.html', form=form)
-#     return "add a profile"
+        if form.validate():
+            username = request.form['username']
+            firstname = request.form['firstname']
+            lastname = request.form['lastname']
+            age = request.form['age']
+            sex = request.form['sex']
+            newprofile = Profile(username, firstname, lastname, age, sex)
+            db.session.add(newprofile)
+            db.session.commit()
+            return redirect('/success')
+        return render_template('profile.html', form=form)
 
 @app.route('/success')
 def success():
@@ -58,9 +53,9 @@ def success():
 @app.route('/profiles/')
 def list_profiles():
     """route for viewing list of profiles"""
-    import pdb;pdb.set_trace()
+#     import pdb;pdb.set_trace()
     profiles = Profile.query.all()
-    return render_template('profiles.html',profiles=profiles)  
+    return render_template('profiles.html', profiles=profiles)  
 
 # @app.route('/profile/,<int: id>')
 # def thing():

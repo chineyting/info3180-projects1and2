@@ -2,6 +2,7 @@
 # Flask
 # ----------------------
 flask
+wtforms
 Flask-WTF
 Flask-SQLAlchemy
 psycopg2
