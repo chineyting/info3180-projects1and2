@@ -8,26 +8,26 @@
       <h1> Create User Profile </h1>
       <form action="{{url_for('add_profile')}}" method="POST" enctype="multipart/form-data">
           {{ form.hidden_tag() }}
-          Upload Profile Photo<br>
-          <input type="file" name="pic" accept="image/*" class="fields">
+          Username {{ form.username }}
+<!--           <input name="username" type="text" class="fields"> -->
           <br>
-          Username<br>
-          <input name="username" type="text" class="fields">
+          First Name {{ form.firstname }}
+<!--           <input name="fname" type="text" class="fields"> -->
           <br>
-          First Name<br>
-          <input name="fname" type="text" class="fields">
+          Last Name {{ form.lastname }}
+<!--           <input name="lname" type="text" class="fields"> -->
           <br>
-          Last Name<br>
-          <input name="lname" type="text" class="fields">
+          Age {{ form.age }}
+<!--           <input name="age" type="text" class="fields"> -->
           <br>
-          Age<br>
-          <input name="age" type="text" class="fields">
-          <br>
-          Sex<br>
-          <select class="fields">
+          Sex {{ form.sex }}
+<!--           <select class="fields">
             <option value="male">Male</option>
             <option value="female">Female</option>
-          </select>
+          </select> -->
+          <br>
+          Upload Profile Photo<br>
+          <input type="file" name="pic" accept="image/*" class="fields">
           <br>
           <input type="submit" value="Submit">
       </form>

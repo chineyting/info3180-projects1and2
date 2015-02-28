@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+  <head>
+     <link href="/static/css/profile.css" rel="stylesheet" >
+  </head>
+  <body>
+    <div class="container"
+      <ul>
+        {% for profile in profiles %}
+        <li> {{profile.id}} {{profile.username}} {{profile.firstname}} {{profile.lastname}}
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </body>
+</html>
