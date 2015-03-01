@@ -1,5 +1,6 @@
 from . import db
 
+
 class Profile(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True)
@@ -9,7 +10,8 @@ class Profile(db.Model):
     sex = db.Column(db.String(120), unique=True)
     image = db.Column(db.String(120), unique=True)
     
-    def __init__(self,username,firstname,lastname,sex):
+    
+    def __init__(self, username, firstname, lastname, age, sex):
         self.username = username
         self.firstname = firstname
         self.lastname = lastname
@@ -17,4 +19,4 @@ class Profile(db.Model):
         self.sex = sex
         
     def __repr__(self):
-        return '<Profile %r %r %r %r>' % (self.username,self. firstname,self.lastname,self.age,self.sex)
+        return '<Profile %r %r>' % (self.username, self.firstname, self.lastname, self.age, self.sex)

@@ -23,11 +23,11 @@ def home():
     return render_template('home.html')
 
 class ProfileForm(Form):
-    username = TextField('username', validators=[Required()])  
-    firstname = TextField('firstname', validators=[Required()])
-    lastname = TextField('lastname', validators=[Required()])
-    age = IntegerField('age', validators=[Required()])
-    sex = TextField('sex', validators=[Required()])
+    username = TextField('username', [validators.Required()])  
+    firstname = TextField('firstname', [validators.Required()])
+    lastname = TextField('lastname', [validators.Required()])
+    age = IntegerField('age', [validators.Required()])
+    sex = TextField('sex', [validators.Required()])
   
 @app.route('/profile', methods=('GET', 'POST'))
 def add_profile():
@@ -43,23 +43,25 @@ def add_profile():
             newprofile = Profile(username, firstname, lastname, age, sex)
             db.session.add(newprofile)
             db.session.commit()
-            return redirect('/success')
-        return render_template('profile.html', form=form)
+        return redirect('/success')
+    return render_template('profile.html', form=form)
 
 @app.route('/success')
 def success():
     return render_template('success.html')
 
-@app.route('/profiles/')
+@app.route('/profiles')
 def list_profiles():
     """route for viewing list of profiles"""
 #     import pdb;pdb.set_trace()
     profiles = Profile.query.all()
     return render_template('profiles.html', profiles=profiles)  
 
-# @app.route('/profile/,<int: id>')
-# def thing():
-#     """route for viewing a profile"""
+@app.route('/profile/<int:id>')
+def view_profile(id):
+    """route for viewing a profile"""
+    profile = Profile.query.get(id)
+    return render_template('profile_view.html',profile=profile)
   
 @app.route('/about/')
 def about():
@@ -96,4 +98,4 @@ def page_not_found(error):
 
 
 if __name__ == '__main__':
-    app.run(debug=True,host="0.0.0.0",port="8888")
+    app.run(debug=True, host="0.0.0.0", port="8888")

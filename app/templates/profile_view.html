@@ -5,13 +5,11 @@
   </head>
   <body>
     {% block main %}
-    <div class="container"
-      <ul>
+    <div class="container">
         {% for profile in profiles %}
-        <li><a href="/profile/{{ profile.id }}"> {{ profile.firstname }} {{ profile.lastname }} </a>
-        </li>
+        <h2> {{ profile.id }} {{ profile.username }} {{ profile.firstname }} {{ profile.lastname }} {{ profile.age }} {{ profile.sex }}
+        </h2>
         {% endfor %}
-      </ul>
     </div>
     {% endblock %}
   </body>
